@@ -4,9 +4,11 @@ body {
     font: 13px/1.6em "Helvetica Neue", Arial, "Microsoft Yahei", sans-serif;
     background: #e4e4e4;
 }
-img{
+
+img {
     border: 0px;
 }
+
 .topLink {
     background: #262626;
     width: 100%;
@@ -194,11 +196,27 @@ img{
     color: black;
 }
 
+.menuId {
+    width: 15px;
+    height: 15px;
+    display: block;
+    float: left;
+    background: #709a4f;
+    border-radius: 2px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    line-height: 15px;
+    font-family: Consolas;
+    margin-right: 3px;
+}
+
 .isHot {
     width: 15px;
     height: 15px;
     background: url('/images/sprit.png') 0 -20px;
     display: block;
+    float: left;
 }
 
 .isSpecialty {
@@ -206,6 +224,7 @@ img{
     height: 15px;
     background: url('/images/sprit.png') 0 0;
     display: block;
+    float: left;
 }
 
 .menu_description_right {
