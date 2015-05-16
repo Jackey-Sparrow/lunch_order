@@ -10,14 +10,14 @@
 
                 <div class="menu_desc"><%= menu.desc %></div>
                 <div class="menu_favor" title="快赞我">♥</div>
+                <div class="menu_Id" title="菜式编号"><%= menu.id %></div>
             </a>
 
             <div class="menu_description">
                 <div class="menu_description_left">
-
                     <a href="/submit/<%= menu.id %>"><%= menu.name %></a>
                     <span>
-                    <i class="menuId"><%=menu.id%></i>
+                    <!--<i class="menuId"><%= menu.id %></i>-->
                         <% if(menu.isHot){ %>
                         <i class="isHot"></i>
                         <% } %>

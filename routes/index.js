@@ -62,4 +62,10 @@ module.exports = function (app) {
         //    res.redirect('/');
         //});
     });
+
+    app.get('/login', function (req, res, next) {
+        res.render('login', {
+            title: 'ITWOCloud Lunch Order System'
+        });
+    });
 };

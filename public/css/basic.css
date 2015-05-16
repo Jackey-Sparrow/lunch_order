@@ -15,10 +15,30 @@ img {
     height: 40px;
 }
 
-.topLink_img {
+.topLink_content {
     width: 1200px;
     height: 40px;
     margin: 0 auto;
+
+}
+
+.topLink_content img{
+    width: 96px;
+    height: 40px;
+    float: left;
+}
+
+.user_operation{
+    width: 100px;
+    height: 40px;
+    float: right;
+    color: #ccc;
+    line-height: 40px;
+}
+
+.user_operation a{
+    color: #ccc;
+    cursor: pointer;
 }
 
 .header {
@@ -167,6 +187,26 @@ img {
     bottom: 25px;
     right: 30px;
 }
+
+.menu_Id{
+    width: 15px;
+    height: 15px;
+    display: block;
+    float: left;
+    /*background: #709a4f;*/
+    background: black;
+    border-radius: 2px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    line-height: 15px;
+    font-family: Consolas;
+    margin-right: 3px;
+    position: absolute;
+    top:10px;
+    left: 10px;
+}
+
 
 .menu_img img {
     width: 230px;
