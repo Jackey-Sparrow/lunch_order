@@ -1,0 +1,133 @@
+.login {
+    width: 950px;
+    height: 500px;
+    margin: 0 auto;
+}
+
+.login_left {
+    width: 600px;
+    height: 500px;
+    float: left;
+}
+
+.login_right {
+    width: 340px;
+    height: 500px;
+    float: right;
+}
+
+.login_form {
+    background-color: #fafcfe;
+    border: 1px solid #dfe8f2;
+    width: 280px;
+    height: 390px;
+    margin-top: 50px;
+    padding: 30px;
+}
+
+.login_form_title {
+    width: 100%;
+    height: 40px;
+}
+
+.login_form_title h3 {
+    font-size: 24px;
+    font-weight: 400;
+    width: 100%;
+    height: 40px;
+    margin: 0px;
+    line-height: 40px;
+}
+
+.login_form_input {
+    width: 283px;
+    height: 44px;
+    margin-top: 10px;
+    background: white;
+    overflow: hidden;
+}
+
+.login_form_input #userName, .login_form_input #password {
+    width: 240px !important;
+    height: 40px;
+    border: 1px solid #d3e1f1;
+    border-radius: 2px;
+    font-size: 14px;
+    height: 40px;
+    width: 100%;
+    padding: 0px 0px 0px 40px;
+}
+
+#userName {
+    background: url('/images/man.png') left center no-repeat;
+}
+
+#password {
+    background: url('/images/lock.png') left center no-repeat;
+}
+
+#authCodeInput {
+    width: 130px;
+    height: 40px;
+    padding: 0px 0px 0px 10px;
+    margin-right: 5px;
+    float: left;
+    border: 1px solid #d3e1f1;
+    border-radius: 2px;
+    font-size: 14px;
+}
+
+.authCode {
+    width: 85px;
+    height: 40px;
+    margin-right: 5px;
+    float: left;
+    border: 1px solid #d3e1f1;
+    border-radius: 2px;
+}
+
+.refreshAuthCode {
+    width: 40px;
+    height: 40px;
+    float: left;
+    cursor: pointer;
+}
+
+.refreshAuthCode img {
+    width: 40px;
+    height: 40px;
+}
+
+.login_form_remember {
+    margin-top: 10px;
+}
+
+.login_form_input button {
+    border: 1px solid #3199e8;
+    font-size: 16px;
+    font-weight: 400;
+    background: #3199e8;
+    color: #fff;
+    border-radius: 3px;
+    height: 40px;
+    width: 100%;
+    cursor: pointer;
+}
+.login_form_service{
+    width:100%;
+    height: 30px;
+    line-height: 30px;
+}
+.login_form_service a {
+    color: #07d;
+    text-decoration: none;
+}
+
+.login_form_service_left {
+    float: left;
+}
+
+.login_form_service_right {
+    float: right;
+}
+

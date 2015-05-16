@@ -1,5 +1,52 @@
-<%- include header %>
-<div class="content">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/css/basic.css'/>
+    <link rel='stylesheet' href='/css/login.css'/>
+</head>
+<body style="background: white">
+<div class="topLink">
+    <div class="topLink_content">
+        <img src="/images/company.png"/>
+    </div>
+</div>
+<div class="login">
+    <div class="login_left"></div>
+    <div class="login_right">
+        <div class="login_form">
+            <div class="login_form_title">
+                <h3>登陆</h3>
+            </div>
+            <div class="login_form_input">
+                <input name="userName" required id="userName" placeholder="请输入用户名"/>
+            </div>
+            <div class="login_form_input">
+                <input name="password" required id="password" type="password" placeholder="密码"/>
+            </div>
+            <div class="login_form_input" style="background: #fafcfe;">
+                <input name="authCodeInput" required id="authCodeInput" placeholder="验证码"/>
 
+                <div class="authCode"></div>
+                <div class="refreshAuthCode">
+                    <img src="/images/refresh.png" alt="刷新"/>
+                </div>
+            </div>
+
+            <div class="login_form_remember">
+                <input class="account-checkbox" type="checkbox" checked="checked">
+                <label> 下次自动登录 </label>
+            </div>
+
+            <div class="login_form_input">
+                <button type="submit">登陆</button>
+            </div>
+            <div class="login_form_service">
+                <a class="login_form_service_left">新用户注册</a>
+                <a class="login_form_service_right">忘记密码</a>
+            </div>
+        </div>
+    </div>
 </div>
 <%- include footer %>
