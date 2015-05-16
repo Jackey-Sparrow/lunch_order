@@ -5,6 +5,8 @@
 var mongodb = require('./db'),
     BSON = require('mongodb').BSONPure;
 
+var dataTableName = 'User_Admin';
+
 var User = function (user) {
     this.firstName = user.firstName;
     this.lastName = user.lastName;
@@ -18,7 +20,7 @@ User.prototype.AddOne = function (callback) {
         if (err) {
             return callback(err);
         }
-        db.collection('User_Admin', function (err, collection) {
+        db.collection(dataTableName, function (err, collection) {
             if (err) {
                 return callback(err);
             }
@@ -47,7 +49,7 @@ User.prototype.UpdateById = function (Id, callback) {
         if (err) {
             return callback(err);
         }
-        db.collection('user', function (err, collection) {
+        db.collection(dataTableName, function (err, collection) {
             if (err) {
                 mongodb.close();
                 return callback(err);
@@ -77,7 +79,7 @@ User.DeleteById = function (Id, callback) {
         if (err) {
             return callback(err);
         }
-        db.collection('user', function (err, collection) {
+        db.collection(dataTableName, function (err, collection) {
             if (err) {
                 mongodb.close();
                 return callback(err);
@@ -98,12 +100,33 @@ User.getAll = function (callback) {
         if (err) {
             return callback(err);
         }
-        db.collection('user', function (err, collection) {
+        db.collection(dataTableName, function (err, collection) {
             if (err) {
                 mongodb.close();
                 return callback(err);
             }
             collection.find().toArray(function (err, docs) {
+                mongodb.close();
+                if (err) {
+                    return callback(err);
+                }
+                callback(null, docs);
+            });
+        });
+    });
+};
+
+User.getAllByName = function (userName, callback) {
+    mongodb.open(function (err, db) {
+        if (err) {
+            return callback(err);
+        }
+        db.collection(dataTableName, function (err, collection) {
+            if (err) {
+                mongodb.close();
+                return callback(err);
+            }
+            collection.find({userName: userName.trim()}).toArray(function (err, docs) {
                 mongodb.close();
                 if (err) {
                     return callback(err);

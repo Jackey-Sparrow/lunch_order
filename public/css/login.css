@@ -25,6 +25,18 @@
     padding: 30px;
 }
 
+.login_error {
+    width: 270px !important;
+    background-color: #fff2f2;
+    border: 1px solid #ff8080;
+    border-radius: 3px;
+    color: #c00;
+    font-size: 12px;
+    padding-left: 10px;
+    line-height: 40px;
+    height: 40px;
+}
+
 .login_form_title {
     width: 100%;
     height: 40px;
@@ -45,6 +57,7 @@
     margin-top: 10px;
     background: white;
     overflow: hidden;
+    position: relative;
 }
 
 .login_form_input #userName, .login_form_input #password {
@@ -59,7 +72,17 @@
 }
 
 #userName {
+    /*background: url('/images/man.png') left center no-repeat;*/
+}
+
+.man {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    display: block;
     background: url('/images/man.png') left center no-repeat;
+    top: 0px;
+    left: 0px;
 }
 
 #password {
@@ -113,11 +136,13 @@
     width: 100%;
     cursor: pointer;
 }
-.login_form_service{
-    width:100%;
+
+.login_form_service {
+    width: 100%;
     height: 30px;
     line-height: 30px;
 }
+
 .login_form_service a {
     color: #07d;
     text-decoration: none;

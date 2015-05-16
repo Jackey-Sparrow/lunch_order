@@ -4,7 +4,9 @@ var MenusDescription = require('../models/MenusDescription');
 
 module.exports = function (app) {
     /* GET home page. */
-    app.get('/', function (req, res, next) {
+    app.get('/', checkLogin);
+    app.get('/', function (req, res) {
+        //checkLogin(req, res, next);
         Menus.getAll(function (err, menus) {
             if (err) {
                 menus = [];
@@ -63,9 +65,47 @@ module.exports = function (app) {
         //});
     });
 
-    app.get('/login', function (req, res, next) {
+    app.get('/login', function (req, res) {
+        console.log('hi:');
+        var error = req.flash('error').toString();
         res.render('login', {
-            title: 'ITWOCloud Lunch Order System'
+            title: 'ITWOCloud Lunch Order System',
+            errorNessage: error
         });
     });
+
+    app.post('/login', function (req, res) {
+        // var md5 = crypto.createHash('md5'),
+        var password = req.body.password;//.digest('hex');
+        User.getAllByName(req.body.userName, function (err, users) {
+            if (!users.length) {
+                req.flash('error', '用户不存在!');
+                return res.redirect('/login');
+            }
+            var user = users[0];
+            if (user.password != password.toString()) {
+                req.flash('error', '密码错误!');
+                return res.redirect('/login');
+            }
+            req.session.user = user;
+            req.flash('success', '登陆成功!');
+            res.redirect('/');
+        });
+    });
+
+    function checkLogin(req, res, next) {
+        if (!req.session.user) {
+            req.flash('error', '未登录!');
+            return res.redirect('/login');
+        }
+        next();
+    }
+
+    function checkNotLogin(req, res, next) {
+        if (req.session.user) {
+            req.flash('error', '已登录!');
+            return res.redirect('back');
+        }
+        next();
+    }
 };
