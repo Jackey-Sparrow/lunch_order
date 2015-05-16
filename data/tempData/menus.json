@@ -1,0 +1,241 @@
+/* 1 */
+[
+  {
+    "id": 1,
+    "name": "益菌菇炒蒜薹肉片饭",
+    "price": 13,
+    "imageUrl": "/images/1.png",
+    "isHot": false,
+    "desc": "蒜薹性温，具有温中下气，补虚，调和脏腑，以及具有活血、防癌、杀菌的功效，对腹痛、腹泻有一定疗效。"
+  }
+
+  /* 2 */
+  {
+    "id": 2,
+    "name": "特色排骨饭",
+    "price": 13,
+    "imageUrl": "",
+    "isHot": false,
+    "desc": "排骨味美肉嫩，不柴不腻，汤汁咸淡适中，与米搭配很可口，与面搭配更美味。排骨能够彻底地吸收配料的精华，烂而不酥，香而不腻，味道十足。"
+  }
+
+  /* 3 */
+  {
+    "id": 3,
+    "name": "茄子豆角肉片饭",
+    "price": 11,
+    "imageUrl": "/images/3.png",
+    "isHot": false,
+    "desc": ""
+  }
+
+  /* 4 */
+  {
+    "id": 4,
+    "name": "可乐鸡翅拼西兰花饭",
+    "price": 13,
+    "imageUrl": "",
+    "isHot": false,
+    "desc": ""
+  }
+
+  /* 5 */
+  {
+    "id": 5,
+    "name": "香芹鱼片白椒饭",
+    "price": 12,
+    "imageUrl": "",
+    "isHot": true,
+    "desc": ""
+  }
+
+  /* 6 */
+  {
+    "id": 6,
+    "name": "酸菜红烧肉饭",
+    "price": 13,
+    "imageUrl": "",
+    "isHot": false,
+    "desc": ""
+  }
+
+  /* 7 */
+  {
+    "id": 7,
+    "name": "西兰花肉片饭",
+    "price": 12,
+    "imageUrl": "",
+    "isHot": false,
+    "desc": ""
+  }
+
+  /* 8 */
+  {
+    "id": 8,
+    "name": "香菇云耳蒸鸡饭",
+    "price": 12,
+    "imageUrl": "",
+    "isHot": false,
+    "desc": ""
+  }
+
+  /* 9 */
+  {
+    "id": 9,
+    "name": "田园缤纷",
+    "price": 13,
+    "imageUrl": "",
+    "isSpecialty": true,
+    "desc": ""
+  }
+
+  /* 10 */
+  {
+    "id": 10,
+    "name": "酸菜肉片饭",
+    "price": 11,
+    "imageUrl": "/images/10.png",
+    "isHot": false,
+    "desc": ""
+  }
+
+  /* 11 */
+  {
+    "id": 11,
+    "name": "白切鸡拼烧鸭饭",
+    "price": 15,
+    "imageUrl": "",
+    "isHot": false,
+    "desc": ""
+  }
+
+  /* 12 */
+  {
+    "id": 12,
+    "name": "农家一碗香饭",
+    "price": 13,
+    "imageUrl": "",
+    "isHot": false,
+    "desc": ""
+  }
+
+  /* 13 */
+  {
+    "id": 13,
+    "name": "金针菇日本豆腐肉片饭",
+    "price": 12,
+    "imageUrl": "/images/13.png",
+    "isHot": false,
+    "desc": ""
+  }
+
+  /* 14 */
+  {
+    "id": 14,
+    "name": "白切鸡饭",
+    "price": 13,
+    "imageUrl": "/images/1.png",
+    "isHot": false,
+    "desc": ""
+  }
+
+  /* 15 */
+  {
+    "id": 15,
+    "name": "土豆牛肉饭",
+    "price": 13,
+    "imageUrl": "/images/15.png",
+    "isHot": false,
+    "desc": ""
+  }
+
+  /* 16 */
+  {
+    "id": 16,
+    "name": "菠萝咕噜肉饭",
+    "price": 13,
+    "imageUrl": "/images/16.png",
+    "isHot": false,
+    "desc": ""
+  }
+
+  /* 17 */
+  {
+    "id": 17,
+    "name": "梅菜扣肉饭",
+    "price": 13,
+    "imageUrl": "/images/1.png",
+    "isHot": false,
+    "desc": ""
+  }
+
+  /* 18 */
+  {
+    "id": 18,
+    "name": "烧鸭拼鸡腿饭",
+    "price": 12,
+    "imageUrl": "/images/1.png",
+    "isHot": false,
+    "desc": ""
+  }
+
+  /* 19 */
+  {
+    "id": 19,
+    "name": "青菜肉片饭",
+    "price": 11,
+    "imageUrl": "/images/1.png",
+    "isHot": false,
+    "desc": ""
+  }
+
+  /* 20 */
+  {
+    "id": 20,
+    "name": "莴笋肉片饭",
+    "price": 11,
+    "imageUrl": "/images/1.png",
+    "isHot": false,
+    "desc": ""
+  }
+
+  /* 21 */
+  {
+    "id": 21,
+    "name": "酸辣土豆丝肉片饭",
+    "price": 10,
+    "imageUrl": "/images/1.png",
+    "isHot": true,
+    "desc": ""
+  }
+
+  /* 22 */
+  {
+    "id": 22,
+    "name": "外婆菜饭",
+    "price": 12,
+    "imageUrl": "/images/1.png",
+    "isHot": true,
+    "desc": ""
+  }
+
+  /* 23 */
+  {
+    "id": 23,
+    "name": "酸辣鸡杂饭",
+    "price": 11,
+    "imageUrl": "/images/1.png",
+    "isHot": true,
+    "desc": ""
+  }
+
+  /* 24 */
+  {
+    "id": 24,
+    "name": "冬瓜焖鸭饭",
+    "price": 13,
+    "imageUrl": "/images/1.png",
+    "isHot": true,
+    "desc": ""
+  }
+]

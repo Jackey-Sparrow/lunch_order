@@ -1,0 +1,56 @@
+<%- include header %>
+<div class="content">
+
+    <div class="content_left">
+        <% menus.forEach(function(menu){ %>
+        <div class="menu">
+            <div class="cart" title="选择"></div>
+            <a class="menu_img" href="/submit/<%= menu.id %>">
+                <img src="<%= menu.imageUrl %>" alt="<%= menu.name %>"/>
+                <div class="menu_desc"><%= menu.desc %></div>
+                <div class="menu_favor" title="快赞我">♥</div>
+            </a>
+
+            <div class="menu_description">
+                <div class="menu_description_left">
+                    <a href="/submit/<%= menu.id %>"><%= menu.name %></a>
+                    <% if(menu.isHot){ %>
+                    <span><i class="isHot"></i></span>
+                    <% } %>
+                    <% if(menu.isSpecialty){ %>
+                    <span><i class="isSpecialty"></i></span>
+                    <% } %>
+                </div>
+                <div class="menu_description_right">
+                    <a><%= menu.price %> RMB</a>
+                </div>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+    <div class="content_right">
+        <div class="information">
+            <h3>公告</h3>
+        </div>
+    </div>
+</div>
+<script src="/javascripts/jquery-1.9.1.js"></script>
+<script>
+    $(function () {
+        //menu
+        $('.menu').mouseenter(function () {
+            $(this).children('a').children('.menu_desc').show();
+            $(this).children('a').children('.menu_favor').show();
+            $(this).children('.cart').show();
+        }).mousemove(function () {
+            $(this).children('a').children('.menu_desc').show();
+            $(this).children('a').children('.menu_favor').show();
+            $(this).children('a').children('.menu_favor').show();
+        }).mouseleave(function () {
+            $(this).children('a').children('.menu_desc').hide();
+            $(this).children('a').children('.menu_favor').hide();
+            $(this).children('.cart').hide();
+        });
+    });
+</script>
+<%- include footer %>

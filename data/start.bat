@@ -1,0 +1,1 @@
+d:\mongodb\bin\mongod.exe -dbpath D:\NodeJs\lunch_order\data

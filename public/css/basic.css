@@ -1,0 +1,361 @@
+body {
+    padding: 00px;
+    margin: 0px;
+    font: 13px/1.6em "Helvetica Neue", Arial, "Microsoft Yahei", sans-serif;
+    background: #e4e4e4;
+}
+img{
+    border: 0px;
+}
+.topLink {
+    background: #262626;
+    width: 100%;
+    height: 40px;
+}
+
+.topLink_img {
+    width: 1200px;
+    height: 40px;
+    margin: 0 auto;
+}
+
+.header {
+    background: #fff;
+    width: 100%;
+    height: 95px;
+}
+
+.header_content {
+    width: 1140px;
+    margin: 0 auto;
+    height: 95px;
+}
+
+.header_content_desc {
+    width: 400px;
+    height: 48px;
+    padding: 23px 10px 24px 5px;
+}
+
+.header_content_desc a {
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    float: left;
+}
+
+.header_content_desc a img {
+    width: 48px;
+    height: 48px;
+}
+
+.header_content_desc_name {
+    padding: 0px;
+    width: 320px;
+    height: 48px;
+    font-size: 20px;
+    font-weight: bold;
+    display: inline-block;
+    padding: 5px 0px 0px 10px;
+}
+
+/*content*/
+
+.content {
+    width: 1140px;
+    height: auto;
+    margin: 13px auto;
+
+}
+
+.content_left {
+    width: 846px;
+    float: left;
+    background: #fff;
+    overflow: hidden;
+}
+
+.content_right {
+    width: 280px;
+    float: right;
+    background: #fff;
+}
+
+.information {
+    width: 280px;
+    height: 250px;
+}
+
+.information h3 {
+    width: 260px;
+    height: 40px;
+    margin: 0px;
+    background: #ff6000;
+    color: white;
+    line-height: 40px;
+    padding-left: 20px;
+}
+
+/*menu*/
+
+.menu {
+    width: 230px;
+    height: 240px;
+    border-style: solid;
+    border-width: 1px;
+    border-top-color: #fff;
+    border-left-color: #fff;
+    border-bottom-color: #e5e9ec;
+    border-right-color: #e5e9ec;
+    float: left;
+    padding: 25px;
+    display: block;
+    position: relative;
+}
+
+.menu:hover {
+    background: #effaff;
+}
+
+.menu_img {
+    width: 230px;
+    height: 175px;
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+}
+
+.menu_desc {
+    display: none;
+    width: 100%;
+    height: 45px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    line-height: 45px;
+    padding-left: 10px;
+    overflow: hidden;
+}
+
+.menu_favor {
+    display: none;
+    width: 18px;
+    height: 18px;
+    background: black;
+    opacity: 0.5;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    border-radius: 2px;
+    font: normal 10px/20px "eleme";
+    color: white;
+    text-align: center;
+}
+
+.cart {
+    display: none;
+    background: url('/images/cart.png') top center no-repeat;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 25px;
+    right: 30px;
+}
+
+.menu_img img {
+    width: 230px;
+    height: 175px;
+}
+
+.menu_description {
+    width: 230px;
+    height: 50px;
+    margin-top: 5px;
+}
+
+.menu_description_left {
+    width: 130px;
+    height: 50px;
+    float: left;
+}
+
+.menu_description_left a {
+    width: 130px;
+    height: 35px;
+    display: block;
+    line-height: 35px;
+    font-size: 14px;
+    cursor: pointer;
+    overflow: hidden;
+    color: black;
+}
+
+.isHot {
+    width: 15px;
+    height: 15px;
+    background: url('/images/sprit.png') 0 -20px;
+    display: block;
+}
+
+.isSpecialty {
+    width: 30px;
+    height: 15px;
+    background: url('/images/sprit.png') 0 0;
+    display: block;
+}
+
+.menu_description_right {
+    width: 100px;
+    height: 50px;
+    float: left;
+}
+
+.menu_description_right a {
+    width: 70px;
+    height: 30px;
+    float: right;
+    display: block;
+    border: 1px solid #e5e9ec;
+    border-radius: 3px;
+    line-height: 30px;
+    text-align: center;
+    margin-top: 3px;
+    background: #fafafa;
+}
+
+/*detail*/
+.menu_detail_img {
+    width: 100%;
+    height: 480px;
+    position: relative;
+}
+
+.menu_detail_img img {
+    width: 100%;
+    height: 480px;
+}
+
+.menu_detail_name {
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    bottom: 40px;
+    left: 100px;
+    font-size: 20px;
+    color: white;
+    line-height: 30px;
+    font-weight: bold;
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.65);
+}
+
+.menu_detail_desc {
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    bottom: 10px;
+    left: 100px;
+    font-size: 12px;
+    color: white;
+    line-height: 30px;
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.65);
+}
+
+.menu_detail_favor {
+    width: 100%;
+    height: 160px;
+    background: white;
+    border-bottom: 1px solid #e5e9ec;
+}
+
+.menu_detail_descriptions {
+    width: 100%;
+    height: auto;
+    margin-bottom: 40px;
+    /*margin: 0px 20px 0px 20px;*/
+    /*background: #e4e4e4;*/
+}
+
+.menu_detail_descriptions_title {
+    width: 100%;
+    height: 35px;
+    border-bottom: 1px solid #e5e9ec;
+    margin: 0 auto;
+    padding-left: 20px;
+}
+
+.menu_detail_descriptions_list {
+    width: 90%;
+    height: auto;
+    margin: 10px auto;
+    border-bottom: 1px solid #e5e9ec;
+}
+
+.menu_detail_descriptions_list_info {
+    width: 100%;
+    height: 25px;
+    line-height: 25px;
+    font-size: 10px;
+    color: #9999b4;
+}
+
+.menu_detail_descriptions_list_text {
+    width: 100%;
+    height: auto;
+    line-height: 25px;
+    font-size: 12px;
+}
+
+.noComment {
+    width: 90%;
+    height: 25px;
+    margin: 0 auto;
+    line-height: 25px;
+    font-size: 12px;
+}
+
+/*menu_description_submit*/
+
+.menu_description_submit {
+    width: 100%;
+    height: auto;
+    margin-bottom: 30px;
+}
+
+.menu_description_submit h4 {
+    width: 100%;
+    height: 25px;
+    padding-left: 20px;
+    border-bottom: 1px solid #e5e9ec;
+}
+
+.menu_description_submit_desc {
+    width: 90%;
+    margin: 0 auto;
+    height: 150px;
+}
+
+#comment {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #e5e9ec;
+}
+
+.submit_desc_btn {
+    width: 90%;
+    height: 30px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+.submit_desc_btn input {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #e5e9ec;
+    background: none;
+    font: normal normal normal 13.3333330154419px/normal Arial;
+    cursor: pointer;
+}
