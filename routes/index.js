@@ -66,12 +66,20 @@ module.exports = function (app) {
     });
 
     app.post('/submit/:id', function (req, res) {
-        var desc = req.body.comment;
-        var userName = req.session.user.userName;
-        var menuId = parseInt(req.params.id);
         var nowDate = new Date();
-        var dateInsert = nowDate.getFullYear().toString() + (nowDate.getMonth()+1).toString() + nowDate.getDate().toString();
-
+        var comment = {
+            desc: req.body.comment,
+            userName: req.session.user.userName,
+            menuId: parseInt(req.params.id),
+            dateInsert: nowDate.getFullYear().toString() + '-' + (nowDate.getMonth() + 1).toString() + '-' + nowDate.getDate().toString()
+        };
+        var menusDescription = new MenusDescription(comment);
+        menusDescription.addComment(function (err, newComment) {
+            if (err) {
+                console.log('add new comment error');
+            }
+            return res.redirect('/submit/' + comment.menuId);
+        });
     });
 
     /**

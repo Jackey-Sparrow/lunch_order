@@ -8,13 +8,13 @@ var mongodb = require('./db'),
 var dataTableName = 'User_Admin';
 
 var User = function (user) {
-    this.firstName = user.firstName;
-    this.lastName = user.lastName;
+    this.userName = user.userName;
+    this.password = user.password;
 };
 User.prototype.AddOne = function (callback) {
     var user = {
-        firstName: this.firstName,
-        lastName: this.lastName
+        userName: this.userName,
+        password: this.password
     };
     mongodb.open(function (err, db) {
         if (err) {

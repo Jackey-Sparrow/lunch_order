@@ -1,0 +1,30 @@
+.sidebar{
+    width: 50px;
+    height: auto;
+    position: fixed;
+    right: 0px;
+    top: 300px;
+}
+
+.sidebar a{
+    width: 45px;
+    height: 45px;
+    box-sizing: border-box;
+    display: block;
+    margin-bottom: 5px;
+    width: 48px;
+    height: 48px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 2px;
+    color: #fff;
+    padding: 12px;
+    font-size: 10px;
+    text-align: center;
+    line-height: 1;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.sidebar a:hover{
+
+}
