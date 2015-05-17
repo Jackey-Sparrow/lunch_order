@@ -1,12 +1,19 @@
 var User = require('../models/User');
 var Menus = require('../models/Menus');
 var MenusDescription = require('../models/MenusDescription');
+var BSON = require('mongodb').BSONPure;
+//todo: use promise
+//var allPromise = Q.all([ fs_readFile('file1.txt'), fs_readFile('file2.txt') ])
+//allPromise.then(console.log, console.error)
 
 module.exports = function (app) {
-    /* GET home page. */
+    /**
+     * home page
+     */
     app.get('/', checkLogin);
     app.get('/', function (req, res) {
         //checkLogin(req, res, next);
+
         Menus.getAll(function (err, menus) {
             if (err) {
                 menus = [];
@@ -19,12 +26,19 @@ module.exports = function (app) {
             res.render('index',
                 {
                     title: 'ITWOCloud Lunch Order System',
-                    menus: menus
+                    menus: menus,
+                    user: req.session.user
+                    //success: req.flash('success').toString()
+                    //message: req.flash('error').toString()
                 }
             );
         });
     });
 
+    /**
+     * menu detail and comment
+     */
+    app.get('/submit/:id', checkLogin);
     app.get('/submit/:id', function (req, res, next) {
         var id = parseInt(req.params.id);
         Menus.getMenuById(id, function (err, menu) {
@@ -33,24 +47,36 @@ module.exports = function (app) {
             }
 
             MenusDescription.getDescriptionByMenuId(id, function (err, descs) {
-                console.log(descs);
+
                 if (err) {
                     descs = [];
                 }
+
                 res.render('submit',
                     {
                         title: 'ITWOCloud Lunch Order System',
                         descs: descs,
                         menu: menu,
-                        hasDesc: descs.length
+                        hasDesc: descs.length,
+                        user: req.session.user
                     }
                 );
             });
         });
+    });
 
+    app.post('/submit/:id', function (req, res) {
+        var desc = req.body.comment;
+        var userName = req.session.user.userName;
+        var menuId = parseInt(req.params.id);
+        var nowDate = new Date();
+        var dateInsert = nowDate.getFullYear().toString() + (nowDate.getMonth()+1).toString() + nowDate.getDate().toString();
 
     });
 
+    /**
+     * temp
+     */
     app.post('/user', function (req, res, next) {
         //var user = {};
         //user.firstName = req.body.firstName;
@@ -65,15 +91,20 @@ module.exports = function (app) {
         //});
     });
 
+    /**
+     * login
+     */
     app.get('/login', function (req, res) {
-        console.log('hi:');
         var error = req.flash('error').toString();
         res.render('login', {
             title: 'ITWOCloud Lunch Order System',
-            errorNessage: error
+            errorMessage: error
         });
     });
 
+    /**
+     * login post
+     */
     app.post('/login', function (req, res) {
         // var md5 = crypto.createHash('md5'),
         var password = req.body.password;//.digest('hex');
@@ -93,14 +124,28 @@ module.exports = function (app) {
         });
     });
 
+    /**
+     * check login
+     *
+     * @param req
+     * @param res
+     * @param next
+     */
     function checkLogin(req, res, next) {
         if (!req.session.user) {
-            req.flash('error', '未登录!');
+            req.flash('error', '请先登录');
             return res.redirect('/login');
         }
         next();
     }
 
+    /**
+     * check not login
+     *
+     * @param req
+     * @param res
+     * @param next
+     */
     function checkNotLogin(req, res, next) {
         if (req.session.user) {
             req.flash('error', '已登录!');

@@ -15,7 +15,7 @@ var MenusDescription = function (desc) {
 };
 
 
-//TODO:ADD COMMENTaaaaaaaaaaaAZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
+//TODO:ADD COMMENT
 
 MenusDescription.getDescriptionByMenuId = function (id, callback) {
     mongodb.open(function (err, db) {

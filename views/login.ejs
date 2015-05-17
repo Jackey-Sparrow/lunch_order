@@ -15,23 +15,22 @@
 <div class="login">
     <div class="login_left"></div>
     <div class="login_right">
-        <form method="post" onsubmit="return false;">
+        <form method="post">
             <div class="login_form">
                 <div class="login_form_title">
                     <h3>登陆</h3>
                 </div>
-                <% if(errorNessage){ %>
+                <% if(errorMessage){ %>
                 <div class="login_form_input login_error">
-                    <%= errorNessage %>
+                    <%= errorMessage %>
                 </div>
                 <% } %>
-
                 <div class="login_form_input">
                     <input name="userName" required id="userName" placeholder="请输入用户名"/>
                     <i class="man"></i>
                 </div>
                 <div class="login_form_input">
-                    <input name="password" required id="password" type="password" placeholder="密码"/>
+                    <input name="password" id="password" required type="password" placeholder="密码"/>
                 </div>
                 <div class="login_form_input" style="background: #fafcfe;">
                     <input name="authCodeInput" id="authCodeInput" placeholder="验证码"/>
@@ -58,10 +57,5 @@
         </form>
     </div>
 </div>
-<script src="/javascripts/jquery-1.9.1.js"></script>
-<script>
-    $(function () {
 
-    });
-</script>
 <%- include footer %>

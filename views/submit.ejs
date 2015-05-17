@@ -16,15 +16,15 @@
             <div class="menu_detail_descriptions_title">
                 <h4>食客评价：</h4>
             </div>
-            <%if(!hasDesc){%>
+            <% if(!hasDesc){ %>
             <div class="noComment">
                 暂无评价哦..
             </div>
-            <%}%>
+            <% } %>
             <% descs.forEach(function(desc){ %>
             <div class="menu_detail_descriptions_list">
                 <div class="menu_detail_descriptions_list_info">
-                    <%= desc.dateInsert %> <%= desc.userId %>
+                    <%= desc.dateInsert %> <%= desc.userName %>
                 </div>
                 <div class="menu_detail_descriptions_list_text">
                     <%= desc.desc %>
@@ -34,16 +34,18 @@
 
         </div>
 
-        <div class="menu_description_submit">
-            <h4>发表评论</h4>
+        <form>
+            <div class="menu_description_submit">
+                <h4>发表评论</h4>
 
-            <div class="menu_description_submit_desc">
-                <textarea name="comment" id="comment" rows="10" tabindex="4"></textarea>
+                <div class="menu_description_submit_desc">
+                    <textarea name="comment" id="comment" rows="10" tabindex="4"></textarea>
+                </div>
             </div>
-        </div>
-        <div class="submit_desc_btn">
-            <input name="submit" id="submit" type="submit" tabindex="5" value="点击发布 / Ctrl+Enter">
-        </div>
+            <div class="submit_desc_btn">
+                <input name="submit" id="submit" type="submit" tabindex="5" value="点击发布 / Ctrl+Enter">
+            </div>
+        </form>
 
     </div>
 
