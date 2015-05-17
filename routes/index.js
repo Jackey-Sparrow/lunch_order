@@ -2,6 +2,8 @@ var User = require('../models/User');
 var Menus = require('../models/Menus');
 var MenusDescription = require('../models/MenusDescription');
 var BSON = require('mongodb').BSONPure;
+
+var OrderRecord = require('../models/OrderRecord');
 //todo: use promise
 //var allPromise = Q.all([ fs_readFile('file1.txt'), fs_readFile('file2.txt') ])
 //allPromise.then(console.log, console.error)
@@ -66,12 +68,12 @@ module.exports = function (app) {
     });
 
     app.post('/submit/:id', function (req, res) {
-        var nowDate = new Date();
+
         var comment = {
             desc: req.body.comment,
             userName: req.session.user.userName,
             menuId: parseInt(req.params.id),
-            dateInsert: nowDate.getFullYear().toString() + '-' + (nowDate.getMonth() + 1).toString() + '-' + nowDate.getDate().toString()
+            dateInsert: getDateStr()
         };
         var menusDescription = new MenusDescription(comment);
         menusDescription.addComment(function (err, newComment) {
@@ -132,6 +134,28 @@ module.exports = function (app) {
         });
     });
 
+    app.post('/addOrder', function (req, res) {
+        var menuId = req.body.menuId;
+        var record = {
+            menuId: menuId,
+            userId: req.session.user._id,
+            userName: req.session.user.userName,
+            dateOrder: getDateStr(),
+            payStatus: 0,
+            payWay: ''
+        };
+
+        var orderRecord = new OrderRecord(record);
+        orderRecord.AddRecord(function (err, newRecord) {
+            if (err) {
+                console.error('add record error');
+                res.send({data: 'fail'});
+            }
+            console.log(newRecord);
+            res.send({data: 'success'});
+        });
+    });
+
     /**
      * check login
      *
@@ -160,5 +184,10 @@ module.exports = function (app) {
             return res.redirect('back');
         }
         next();
+    }
+
+    function getDateStr() {
+        var nowDate = new Date();
+        return nowDate.getFullYear().toString() + '-' + (nowDate.getMonth() + 1).toString() + '-' + nowDate.getDate().toString();
     }
 };

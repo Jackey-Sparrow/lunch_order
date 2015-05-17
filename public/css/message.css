@@ -1,0 +1,39 @@
+.message {
+    width: 290px;
+    height: 270px;
+    position: absolute;
+    bottom: -290px;
+    right: 100px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+    background-color: #fff;
+    border-top-width: 3px;
+    border-top-style: solid;
+    padding: 10px;
+    line-height: 40px;
+}
+
+.menu_message {
+    width: 290px;
+    height: 38px;
+    border-bottom: 1px dashed #e5e9ec;
+}
+
+.menu_message_name {
+    width: 140px;
+    height: 38px;
+    float: left;
+    padding-left: 20px;
+}
+
+.menu_message_total {
+    width: 70px;
+    height: 38px;
+    float: left;
+}
+
+.menu_message_price {
+    width: 60px;
+    height: 38px;
+    float: right;
+    color: red;
+}

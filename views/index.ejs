@@ -4,7 +4,7 @@
     <div class="content_left">
         <% menus.forEach(function(menu){ %>
         <div class="menu">
-            <div class="cart" title="选择"></div>
+            <div class="cart" title="选择" menuId="<%= menu.id %>"></div>
             <a class="menu_img" href="/submit/<%= menu.id %>">
                 <img src="<%= menu.imageUrl %>" alt="<%= menu.name %>"/>
 
@@ -40,6 +40,8 @@
     </div>
 </div>
 <script src="/javascripts/jquery-1.9.1.js"></script>
+<link rel='stylesheet' href='/css/message.css'/>
+<script src="/javascripts/message.js"></script>
 <script>
     $(function () {
         //menu
@@ -55,6 +57,23 @@
             $(this).children('a').children('.menu_desc').hide();
             $(this).children('a').children('.menu_favor').hide();
             $(this).children('.cart').hide();
+        });
+
+
+        $('.cart').click(function () {
+            var menuId = $(this).attr('menuId');
+            $.ajax({
+                url: '/addOrder',
+                method: 'POST',
+                data: {menuId: menuId},
+                success: function (data) {
+                    console.log(data);
+                    $('.message').animate({bottom: '0px'}, 1000);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
         });
     });
 </script>
