@@ -12,7 +12,7 @@
     line-height: 40px;
 }
 
-.message .total{
+.message .total {
     font-weight: 900;
 }
 
@@ -41,4 +41,27 @@
     height: 38px;
     float: right;
     color: red;
+}
+
+.error_message_overlay {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.error_message_content {
+    padding: 20px;
+    width: 400px;
+    position: fixed;
+    top: 50%;
+    left: 40%;
+    background: white;
+    z-index: 15;
+    color: black;
+}
+
+.error{
+    display: none;
 }

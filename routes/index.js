@@ -16,6 +16,7 @@ module.exports = function (app) {
     app.get('/', function (req, res) {
         //checkLogin(req, res, next);
 
+
         Menus.getAll(function (err, menus) {
             if (err) {
                 menus = [];
@@ -25,15 +26,44 @@ module.exports = function (app) {
                 var id2 = parseInt(item2.id);
                 return id1 - id2;
             });
-            res.render('index',
-                {
-                    title: 'ITWOCloud Lunch Order System',
-                    menus: menus,
-                    user: req.session.user
-                    //success: req.flash('success').toString()
-                    //message: req.flash('error').toString()
+            var orderFilter = {
+                userId: req.session.user._id,
+                dateOrder: getDateStr()
+            };
+            OrderRecord.getTodayOrderByFilter(orderFilter, function (err, records) {
+                if (err) {
+                    console.error('get today order error');
                 }
-            );
+                //fill record's menu
+                var num = 0,
+                    total = 0;
+                for (var i = 0; i < records.length; i++) {
+                    var menuId = records[i].menuId;
+                    var menu = menus.filter(function (item) {
+                        return item.id === menuId;
+                    });
+                    if (menu) {
+                        records[i].menu = menu[0];
+                        var price = menu[0].price;
+                        total += price * records[i].num;
+                    }
+
+                    num += records[i].num;
+                }
+                res.render('index',
+                    {
+                        title: 'ITWOCloud Lunch Order System',
+                        menus: menus,
+                        user: req.session.user,
+                        orderRecords: records,
+                        num: num,
+                        total: total
+                        //success: req.flash('success').toString()
+                        //message: req.flash('error').toString()
+                    }
+                );
+            });
+
         });
     });
 

@@ -16,14 +16,12 @@ var calculate = function (menu) {
     $total.children('.menu_message_total').html(totalOrder + 1);
     var totalMoney = parseInt($total.children('.menu_message_price').html().replace('¥', ''));
     $total.children('.menu_message_price').html('¥ ' + (totalMoney + parseInt(menu.price)));
-
 };
 
 var addMessageOrder = function (menu) {
     var $menus = $('.menus_container .menu_message');
     var id = menu.id;
     calculate(menu);
-    //var isExist = false;
     for (var i = 0; i < $menus.length; i++) {
         var $menu = $($menus[i]);
         var menuId = $menu.attr('menuId');
@@ -38,13 +36,13 @@ var addMessageOrder = function (menu) {
 };
 
 
-var messageStr = '<div class="message" style="">' +
-    '<div class="menus_container">' +
-    '</div>' +
-    '<div class="menu_message total">' +
-    '<div class="menu_message_name">今日已点</div>' +
-    '<div class="menu_message_total">0</div>' +
-    '<div class="menu_message_price">¥ 0</div>' +
-    '</div>' +
-    '</div>';
-$('body').append(messageStr);
+//var messageStr = '<div class="message" <%=user%> >' +
+//    '<div class="menus_container">' +
+//    '</div>' +
+//    '<div class="menu_message total">' +
+//    '<div class="menu_message_name">今日已点</div>' +
+//    '<div class="menu_message_total">0</div>' +
+//    '<div class="menu_message_price">¥ 0</div>' +
+//    '</div>' +
+//    '</div>';
+//$('body').append(messageStr);
