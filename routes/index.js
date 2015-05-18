@@ -135,7 +135,7 @@ module.exports = function (app) {
     });
 
     app.post('/addOrder', function (req, res) {
-        var menuId = req.body.menuId;
+        var menuId = parseInt(req.body.menuId);
         var record = {
             menuId: menuId,
             userId: req.session.user._id,
@@ -145,15 +145,46 @@ module.exports = function (app) {
             payWay: ''
         };
 
-        var orderRecord = new OrderRecord(record);
-        orderRecord.AddRecord(function (err, newRecord) {
+        var filter = {
+            menuId: record.menuId,
+            userId: record.userId,
+            dateOrder: record.dateOrder
+        };
+        
+        OrderRecord.getTodayOrderByFilter(filter, function (err, records) {
             if (err) {
-                console.error('add record error');
-                res.send({data: 'fail'});
+                console.error('get today order error');
             }
-            console.log(newRecord);
-            res.send({data: 'success'});
+
+            if (records.length) {
+                var oldRecord = records[0];
+                oldRecord.num = oldRecord.num + 1;
+                //orderRecord = new OrderRecord(oldRecord);
+                OrderRecord.updateOrder(oldRecord, function (err, result) {
+                    if (err) {
+                        console.error('update order record error');
+                        res.send({data: 'fail'});
+                    }
+                    console.log(result);
+                    if (result === 1) {
+                        res.send({data: 'success'});
+                    }
+                });
+            } else {
+                //insert
+                var orderRecord = new OrderRecord(record);
+                orderRecord.AddRecord(function (err, newRecord) {
+                    if (err) {
+                        console.error('add record error');
+                        res.send({data: 'fail'});
+                    }
+                    res.send({data: 'success'});
+                });
+            }
+
         });
+        console.log(getDateStr());
+
     });
 
     /**
@@ -188,6 +219,8 @@ module.exports = function (app) {
 
     function getDateStr() {
         var nowDate = new Date();
-        return nowDate.getFullYear().toString() + '-' + (nowDate.getMonth() + 1).toString() + '-' + nowDate.getDate().toString();
+        var month = nowDate.getMonth() + 1;
+        month = month < 10 ? ('0' + month.toString()) : month.toString();
+        return nowDate.getFullYear().toString() + '-' + month + '-' + nowDate.getDate().toString();
     }
 };

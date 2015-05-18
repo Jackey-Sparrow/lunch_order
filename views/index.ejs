@@ -4,7 +4,8 @@
     <div class="content_left">
         <% menus.forEach(function(menu){ %>
         <div class="menu">
-            <div class="cart" title="选择" menuId="<%= menu.id %>"></div>
+            <div class="cart" title="选择" menuId="<%= menu.id %>" menuName="<%= menu.name %>"
+                 menuPrice="<%= menu.price %>"></div>
             <a class="menu_img" href="/submit/<%= menu.id %>">
                 <img src="<%= menu.imageUrl %>" alt="<%= menu.name %>"/>
 
@@ -60,21 +61,39 @@
         });
 
 
-        $('.cart').click(function () {
-            var menuId = $(this).attr('menuId');
+        var addOrder = function (that) {
+            var menuId = $(that).attr('menuId');
+            var menuName = $(that).attr('menuName');
+            var menuPrice = $(that).attr('menuPrice');
+            var menu = {
+                id: menuId,
+                name: menuName,
+                price: menuPrice
+            };
             $.ajax({
                 url: '/addOrder',
                 method: 'POST',
                 data: {menuId: menuId},
-                success: function (data) {
-                    console.log(data);
-                    $('.message').animate({bottom: '0px'}, 1000);
+                success: function (response) {
+                    if (response.data === 'success') {
+                        addMessageOrder(menu);
+                        $('.message').animate({bottom: '0px'}, 1000);
+                    }
                 },
                 error: function (error) {
                     console.log(error);
                 }
             });
+        };
+
+        $('.cart').click(function () {
+
+            addOrder(this);
         });
+        $('.cart').dblclick(function () {
+            addOrder(this);
+        });
+
     });
 </script>
 <%- include footer %>

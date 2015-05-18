@@ -1,7 +1,7 @@
 .message {
     width: 290px;
-    height: 270px;
-    position: absolute;
+    min-height: 50px;
+    position: fixed;
     bottom: -290px;
     right: 100px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
@@ -12,10 +12,15 @@
     line-height: 40px;
 }
 
+.message .total{
+    font-weight: 900;
+}
+
 .menu_message {
     width: 290px;
     height: 38px;
     border-bottom: 1px dashed #e5e9ec;
+    overflow: hidden;
 }
 
 .menu_message_name {
