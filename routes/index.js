@@ -150,16 +150,16 @@ module.exports = function (app) {
             userId: record.userId,
             dateOrder: record.dateOrder
         };
-        
+
         OrderRecord.getTodayOrderByFilter(filter, function (err, records) {
             if (err) {
                 console.error('get today order error');
             }
 
             if (records.length) {
+                //update
                 var oldRecord = records[0];
                 oldRecord.num = oldRecord.num + 1;
-                //orderRecord = new OrderRecord(oldRecord);
                 OrderRecord.updateOrder(oldRecord, function (err, result) {
                     if (err) {
                         console.error('update order record error');
@@ -183,7 +183,7 @@ module.exports = function (app) {
             }
 
         });
-        console.log(getDateStr());
+
 
     });
 
