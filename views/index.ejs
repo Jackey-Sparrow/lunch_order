@@ -18,7 +18,6 @@
                 <div class="menu_description_left">
                     <a href="/submit/<%= menu.id %>"><%= menu.name %></a>
                     <span>
-                    <!--<i class="menuId"><%= menu.id %></i>-->
                         <% if(menu.isHot){ %>
                         <i class="isHot"></i>
                         <% } %>
@@ -40,60 +39,31 @@
         </div>
     </div>
 </div>
+<div class="message">
+    <div class="menus_container">
+        <% orderRecords.forEach(function(record){ %>
+        <div class="menu_message" menuId="<%= record.menu.id %>">
+            <div class="menu_message_name"><%= record.menu.name %></div>
+            <div class="menu_message_total"><%= record.num %></div>
+            <div class="menu_message_price">¥ <%= record.menu.price %> </div>
+        </div>
+        <% }) %>
+    </div>
+    <div class="menu_message total">
+        <div class="menu_message_name">今日已点</div>
+        <div class="menu_message_total"><%= num %></div>
+        <div class="menu_message_price">¥ <%= total %></div>
+    </div>
+</div>
+<div class="error">
+    <div class="error_message_overlay">
+    </div>
+    <div class="error_message_content">error</div>
+</div>
+
 <script src="/javascripts/jquery-1.9.1.js"></script>
 <link rel='stylesheet' href='/css/message.css'/>
 <script src="/javascripts/message.js"></script>
-<script>
-    $(function () {
-        //menu
-        $('.menu').mouseenter(function () {
-            $(this).children('a').children('.menu_desc').show();
-            $(this).children('a').children('.menu_favor').show();
-            $(this).children('.cart').show();
-        }).mousemove(function () {
-            $(this).children('a').children('.menu_desc').show();
-            $(this).children('a').children('.menu_favor').show();
-            $(this).children('a').children('.menu_favor').show();
-        }).mouseleave(function () {
-            $(this).children('a').children('.menu_desc').hide();
-            $(this).children('a').children('.menu_favor').hide();
-            $(this).children('.cart').hide();
-        });
-
-
-        var addOrder = function (that) {
-            var menuId = $(that).attr('menuId');
-            var menuName = $(that).attr('menuName');
-            var menuPrice = $(that).attr('menuPrice');
-            var menu = {
-                id: menuId,
-                name: menuName,
-                price: menuPrice
-            };
-            $.ajax({
-                url: '/addOrder',
-                method: 'POST',
-                data: {menuId: menuId},
-                success: function (response) {
-                    if (response.data === 'success') {
-                        addMessageOrder(menu);
-                        $('.message').animate({bottom: '0px'}, 1000);
-                    }
-                },
-                error: function (error) {
-                    console.log(error);
-                }
-            });
-        };
-
-        $('.cart').click(function () {
-
-            addOrder(this);
-        });
-        $('.cart').dblclick(function () {
-            addOrder(this);
-        });
-
-    });
-</script>
+<script src="/javascripts/menu.js"></script>
+<script src="/javascripts/error.js"></script>
 <%- include footer %>

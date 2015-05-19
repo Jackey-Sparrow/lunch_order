@@ -1,7 +1,7 @@
 var User = require('../models/User');
 var Menus = require('../models/Menus');
-var MenusDescription = require('../models/MenusDescription');
-var BSON = require('mongodb').BSONPure;
+//var MenusComment = require('../models/MenusComment');
+var ModelBasicClass = require('../models/ModelBasicClass');
 
 var OrderRecord = require('../models/OrderRecord');
 //todo: use promise
@@ -14,10 +14,8 @@ module.exports = function (app) {
      */
     app.get('/', checkLogin);
     app.get('/', function (req, res) {
-        //checkLogin(req, res, next);
 
-
-        Menus.getAll(function (err, menus) {
+        ModelBasicClass.getAll('Menus', function (err, menus) {
             if (err) {
                 menus = [];
             }
@@ -30,7 +28,7 @@ module.exports = function (app) {
                 userId: req.session.user._id,
                 dateOrder: getDateStr()
             };
-            OrderRecord.getTodayOrderByFilter(orderFilter, function (err, records) {
+            ModelBasicClass.getItemsByFilter(orderFilter, 'Order_Record', function (err, records) {
                 if (err) {
                     console.error('get today order error');
                 }
@@ -58,8 +56,6 @@ module.exports = function (app) {
                         orderRecords: records,
                         num: num,
                         total: total
-                        //success: req.flash('success').toString()
-                        //message: req.flash('error').toString()
                     }
                 );
             });
@@ -73,12 +69,13 @@ module.exports = function (app) {
     app.get('/submit/:id', checkLogin);
     app.get('/submit/:id', function (req, res, next) {
         var id = parseInt(req.params.id);
-        Menus.getMenuById(id, function (err, menu) {
+        var filter = {id: id};
+        ModelBasicClass.getItemByFilter(filter, 'Menus', function (err, menu) {
             if (err) {
                 console.error('get menu error');
             }
 
-            MenusDescription.getDescriptionByMenuId(id, function (err, descs) {
+            ModelBasicClass.getItemsByFilter({menuId: parseInt(id, 10)}, 'Menus_Comment', function (err, descs) {
 
                 if (err) {
                     descs = [];
@@ -105,8 +102,8 @@ module.exports = function (app) {
             menuId: parseInt(req.params.id),
             dateInsert: getDateStr()
         };
-        var menusDescription = new MenusDescription(comment);
-        menusDescription.addComment(function (err, newComment) {
+        //add new comment
+        ModelBasicClass.addItem(comment, 'Menus_Comment', function (err, newComment) {
             if (err) {
                 console.log('add new comment error');
             }
@@ -114,22 +111,6 @@ module.exports = function (app) {
         });
     });
 
-    /**
-     * temp
-     */
-    app.post('/user', function (req, res, next) {
-        //var user = {};
-        //user.firstName = req.body.firstName;
-        //user.lastName = req.body.lastName;
-        //var newUser = new User(user);
-        //newUser.AddOne(function (err, user) {
-        //    if (err) {
-        //        return;
-        //    }
-        //    req.flash('success', '添加成功');
-        //    res.redirect('/');
-        //});
-    });
 
     /**
      * login
@@ -146,9 +127,10 @@ module.exports = function (app) {
      * login post
      */
     app.post('/login', function (req, res) {
-        // var md5 = crypto.createHash('md5'),
-        var password = req.body.password;//.digest('hex');
-        User.getAllByName(req.body.userName, function (err, users) {
+
+        var password = req.body.password;
+        var filter = {userName: req.body.userName.trim()};
+        ModelBasicClass.getItemsByFilter(filter, 'User_Admin', function (err, users) {
             if (!users.length) {
                 req.flash('error', '用户不存在!');
                 return res.redirect('/login');
@@ -172,7 +154,8 @@ module.exports = function (app) {
             userName: req.session.user.userName,
             dateOrder: getDateStr(),
             payStatus: 0,
-            payWay: ''
+            payWay: '',
+            num: 1
         };
 
         var filter = {
@@ -180,8 +163,7 @@ module.exports = function (app) {
             userId: record.userId,
             dateOrder: record.dateOrder
         };
-
-        OrderRecord.getTodayOrderByFilter(filter, function (err, records) {
+        ModelBasicClass.getItemsByFilter(filter, 'Order_Record', function (err, records) {
             if (err) {
                 console.error('get today order error');
             }
@@ -202,8 +184,7 @@ module.exports = function (app) {
                 });
             } else {
                 //insert
-                var orderRecord = new OrderRecord(record);
-                orderRecord.AddRecord(function (err, newRecord) {
+                ModelBasicClass.addItem(record, 'Order_Record', function (err, newRecord) {
                     if (err) {
                         console.error('add record error');
                         res.send({data: 'fail'});
