@@ -146,6 +146,9 @@ module.exports = function (app) {
         });
     });
 
+    /**
+     * add order
+     */
     app.post('/addOrder', function (req, res) {
         var menuId = parseInt(req.body.menuId);
         var record = {
@@ -194,7 +197,73 @@ module.exports = function (app) {
             }
 
         });
+    });
 
+    /**
+     * history order
+     */
+    app.get('/history', checkLogin);
+    app.get('/history', function (req, res) {
+        var filter = {
+            userId: req.session.user._id
+        };
+
+        ModelBasicClass.getAll('Menus', function (err, menus) {
+            if (err) {
+                console.error('get menus error');
+            }
+            ModelBasicClass.getItemsByFilter(filter, 'Order_Record', function (err, records) {
+                if (err) {
+                    console.error('get all history record error');
+                }
+
+                var result = [];
+                for (var i = 0; i < records.length; i++) {
+                    var record = records[i];
+                    var menuId = record.menuId;
+                    var menu = menus.filter(function (item) {
+                        return item.id === menuId;
+                    });
+                    record.menu = menu[0];
+
+                    console.log(record);
+                    var index = -1;
+                    for (var j = 0; j < result.length; j++) {
+                        var dateOrder = result[j].date;
+                        if (dateOrder === records[i].dateOrder) {
+                            index = j;
+                            break;
+                        }
+                    }
+
+                    if (index === -1) {
+                        result.push(
+                            {
+                                date: record.dateOrder,
+                                data: [record]
+                            }
+                        );
+                    } else {
+                        result[index].data.push(record);
+                    }
+
+                }
+
+                result.sort(function (item1, item2) {
+                    var date1 = item1.date.replace('-', '');
+                    var date2 = item2.date.replace('-', '');
+                    return date1 < date2;
+                });
+                //console.log(result);
+                res.render('history',
+                    {
+                        title: 'ITWOCloud Lunch Order System',
+                        user: req.session.user,
+                        historys: result
+                    }
+                );
+            });
+        });
 
     });
 

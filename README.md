@@ -12,7 +12,6 @@ simple lunch order system on nodejs
 show menus
 
 
- 
 #### comment
  add comment and show comment. 
  
@@ -22,9 +21,8 @@ show menus
  
 #### order record
  add order. 
- 
- 
- TODO: show message of orders todays /  order history 
+ order history
+ show message of orders todays
  
 #### guess you what you like
  TODO: 

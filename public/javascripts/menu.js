@@ -22,6 +22,10 @@ var menuAttach = function (e, action) {
     }
 };
 
+var testA = function (arg) {
+    console.log(arg);
+};
+
 //TODO: use proxy will be better
 /**
  * menu mouseenter mouseover mouseleave
@@ -29,8 +33,12 @@ var menuAttach = function (e, action) {
  */
 $('.menu').mouseenter(function () {
     menuAttach(this, 'show');
+    //$.proxy(menuAttach('show'),this);
+
 }).mousemove(function () {
     menuAttach(this, 'show');
+    //$.proxy(testA,this,'show');
+    //$.proxy(menuAttach('show'),this);
 }).mouseleave(function () {
     menuAttach(this, 'hide');
 });

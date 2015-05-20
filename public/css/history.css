@@ -1,0 +1,53 @@
+
+.content{
+    background: white;
+}
+
+.history_date{
+    width: 100%;
+    height: 30px;
+    /*border-bottom:1px solid #e5e9ec;*/
+    line-height: 30px;
+    text-align: center;
+}
+.history_date span{
+    width:auto;
+    height: 30px;
+    line-height: 30px;
+    color: #ff6000;;
+}
+.history{
+    width:100%;
+    height: 40px;
+    border-bottom:1px solid #e5e9ec;
+    margin-bottom: 10px;
+    line-height: 40px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.history_name{
+    width:40%;
+    height: 40px;
+    float: left;
+}
+
+.history_num{
+    width:5%;
+    height: 40px;
+    float: left;
+}
+
+
+
+.history_status{
+    width:20%;
+    height: 40px;
+    float: left;
+}
+
+.history_payWay{
+    width:20%;
+    height: 40px;
+    float: left;
+}

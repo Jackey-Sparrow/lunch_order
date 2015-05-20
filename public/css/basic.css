@@ -62,6 +62,8 @@ img {
     line-height: 40px;
     margin-right: 5px;
     cursor: pointer;
+    color: #ccc;
+    text-decoration: none;
 }
 
 .user_operation {

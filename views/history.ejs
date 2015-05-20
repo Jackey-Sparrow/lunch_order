@@ -1,0 +1,22 @@
+<%- include header %>
+<link rel='stylesheet' href='/css/history.css'/>
+<div class="content">
+    <% historys.forEach(function(history){ %>
+    <div class="history_date">
+        <span>- - - - - - - - - - - </span>
+        <span><%= history.date %></span>
+        <span>- - - - - - - - - - - </span>
+    </div>
+    <% history.data.forEach(function(record){ %>
+    <div class="history">
+        <div class="history_name"><%= record.menu.name %></div>
+        <div class="history_num">¥ <%= record.menu.price %></div>
+        <div class="history_status"><%= record.payStatus %></div>
+        <div class="history_payWay"><%= record.payWay %></div>
+        <div><%= record.num %>份</div>
+    </div>
+    <% }) %>
+    <% }) %>
+
+</div>
+<%- include footer %>
