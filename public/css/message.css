@@ -2,7 +2,7 @@
     width: 290px;
     min-height: 50px;
     position: fixed;
-    bottom: -290px;
+    bottom: -100%;
     right: 100px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
     background-color: #fff;
@@ -31,16 +31,24 @@
 }
 
 .menu_message_total {
-    width: 70px;
+    width: 50px;
     height: 38px;
     float: left;
 }
 
 .menu_message_price {
-    width: 60px;
+    width: 40px;
+    height: 38px;
+    float: left;
+}
+
+.menu_message_delete{
+    width: 40px;
     height: 38px;
     float: right;
+    cursor: pointer;
     color: red;
+    text-align: center;
 }
 
 .error_message_overlay {

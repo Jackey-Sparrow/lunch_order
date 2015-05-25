@@ -63,6 +63,8 @@ var addOrder = function (e) {
         data: {menuId: menuId},
         success: function (response) {
             if (response.data === 'success') {
+                var record = response.record;
+                menu.record = record;
                 addMessageOrder(menu);
                 $('.message').animate({bottom: '0px'}, 1000);
             }
@@ -87,4 +89,23 @@ $('.cart').click(function () {
  */
 $('.cart').dblclick(function () {
     addOrder(this);
+});
+
+$('.menu_message_delete').click(function () {
+    var orderId = $(this).attr('orderId');
+    var that = this;
+    $.ajax({
+        url: '/deleteOrder',
+        method: 'POST',
+        data: {orderId: orderId},
+        success: function (response) {
+            console.log(response);
+            $(that).parent('.menu_message').remove();
+            calculate();
+        },
+        error: function (error) {
+            console.log('delete order fail' + error);
+            //todo: show error dialog
+        }
+    });
 });

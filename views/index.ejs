@@ -46,6 +46,7 @@
             <div class="menu_message_name"><%= record.menu.name %></div>
             <div class="menu_message_total"><%= record.num %></div>
             <div class="menu_message_price">¥ <%= record.menu.price %> </div>
+            <div class="menu_message_delete" orderId="<%=record._id%>">x</div>
         </div>
         <% }) %>
     </div>

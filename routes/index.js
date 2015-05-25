@@ -192,9 +192,40 @@ module.exports = function (app) {
                         console.error('add record error');
                         res.send({data: 'fail'});
                     }
-                    res.send({data: 'success'});
+                    res.send(
+                        {
+                            data: 'success',
+                            record: newRecord
+                        });
                 });
             }
+
+        });
+    });
+
+    /**
+     * delete Order By Id
+     */
+    app.post('/deleteOrder', function (req, res) {
+        var orderId = req.body.orderId;
+        console.log(orderId);
+        ModelBasicClass.DeleteItemById(orderId, 'Order_Record', function (err, result) {
+
+            if (err) {
+                console.log('delete order fail' + err);
+                res.send(
+                    {
+                        data: 'fail'
+                    }
+                );
+            }
+            console.log(result);
+            res.send(
+                {
+                    data: 'success',
+                    result: result
+                }
+            );
 
         });
     });
