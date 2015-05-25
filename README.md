@@ -2,35 +2,36 @@
 simple lunch order system on nodejs
 
 
-#### login 
- use userName and password to login. 
- 
- 
+#### login (not done)
+ use userName and password to login.
  TODO:verification code /  authority of user 
  
-#### menus 
+#### menus (not done)
 show menus
+TODO: add company to menus
 
-
-#### comment
- add comment and show comment. 
- 
- 
+#### comment (not done)
+ add comment and show comment.
  TODO: manager comment / pageination 
  
  
-#### order record
+#### order record (not done)
  add order. 
  order history
  show message of orders todays
+ delete order
+ TODO:order status
  
-#### guess you what you like
+#### guess you what you like (not start)
  TODO: 
  
-#### today's order manager (just for administrator)
+#### today's order manager (just for administrator) (not start)
   TODO:
+
+#### mongodb (not done)
+TODO:use mongoose or keep mongodb connect open
   
-#### response layout
+#### response layout (not start)
 TODO:
 
-##TODO:use angular 
+##TODO:use angular (not start)
