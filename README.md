@@ -1,7 +1,8 @@
 
 # login (not done)
  use userName and password to login.
- TODO:verification code /  authority of user 
+ authority of user,  for now, it just 1 and 0, 1 is for admin, and 0 is for normal user
+ TODO:verification code / logot
  
 # menus (not done)
 show menus

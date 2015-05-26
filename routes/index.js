@@ -115,6 +115,7 @@ module.exports = function (app) {
     /**
      * login
      */
+    app.get('/login', checkNotLogin);
     app.get('/login', function (req, res) {
         var error = req.flash('error').toString();
         res.render('login', {
@@ -127,7 +128,8 @@ module.exports = function (app) {
      * login post
      */
     app.post('/login', function (req, res) {
-
+        var rememberMe = req.body.rememberMe;
+        console.log(rememberMe);
         var password = req.body.password;
         var filter = {userName: req.body.userName.trim()};
         ModelBasicClass.getItemsByFilter(filter, 'User_Admin', function (err, users) {
@@ -135,12 +137,22 @@ module.exports = function (app) {
                 req.flash('error', '用户不存在!');
                 return res.redirect('/login');
             }
+
             var user = users[0];
             if (user.password != password.toString()) {
                 req.flash('error', '密码错误!');
                 return res.redirect('/login');
             }
             req.session.user = user;
+            if (rememberMe) {
+                var cookiesArray = [];
+                cookiesArray.push('_id=' + user._id);
+                cookiesArray.push('userName=' + user.userName);
+                cookiesArray.push('password=' + user.password);
+                cookiesArray.push('role=' + user.role);
+
+                res.setHeader("Set-Cookie", cookiesArray);
+            }
             req.flash('success', '登陆成功!');
             res.redirect('/');
         });
@@ -306,10 +318,12 @@ module.exports = function (app) {
      * @param next
      */
     function checkLogin(req, res, next) {
-        if (!req.session.user) {
+        var cookies = getCookies(req.headers.cookie);
+        if ((!req.session.user)  && (!cookies._id)) {
             req.flash('error', '请先登录');
             return res.redirect('/login');
         }
+        req.session.user = cookies;
         next();
     }
 
@@ -333,5 +347,14 @@ module.exports = function (app) {
         var month = nowDate.getMonth() + 1;
         month = month < 10 ? ('0' + month.toString()) : month.toString();
         return nowDate.getFullYear().toString() + '-' + month + '-' + nowDate.getDate().toString();
+    }
+
+    function getCookies(cookie) {
+        var cookies = {};
+        cookie && cookie.split(';').forEach(function (cookie) {
+            var parts = cookie.split('=');
+            cookies[parts[0].trim()] = ( parts[1] || '' ).trim();
+        });
+        return cookies;
     }
 };
