@@ -7,7 +7,7 @@
  
 # menus (not done)
  1 show menus
- 2 TODO: add company to menus
+ 2 TODO: add company to
 
 # comment (not done)
  add comment and show comment.
@@ -17,12 +17,12 @@
 # order record (not done)
  add order. 
  order history
- show message of orders todays
+ show message of orders todaysmenus
  delete order
- TODO:order status 0 È¡Ïû 1 ÒÑÌá½» 2 ÏµÍ³ÒÑÈ·ÈÏ 3ÒÑ·¢»õ 4 ÒÑÇ©ÊÕ
- ````admin modify status
- TODO: PAY WAY 0 Î´¸¶¿î 1 ÏÖ½ğÖ§¸¶ 2 Î¢ĞÅÖ§¸¶ 3 Ö§¸¶±¦Ö§¸¶ 4 ÆäËü
- ~~~~admin modify payway
+ TODO:order status 0 å–æ¶ˆ 1 å·²æäº¤ 2 ç³»ç»Ÿå·²ç¡®è®¤ 3å·²å‘è´§ 4 å·²ç­¾æ”¶
+                    ````admin modify status
+                    TODO: PAY WAY 0 æœªä»˜æ¬¾ 1 ç°é‡‘æ”¯ä»˜ 2 å¾®ä¿¡æ”¯ä»˜ 3 æ”¯ä»˜å®æ”¯ä»˜ 4 å…¶å®ƒ
+                    ~~~~admin modify payway
 
 # guess you what you like (not start)
  TODO: 
