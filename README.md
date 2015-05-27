@@ -30,8 +30,8 @@
 # today's order manager (just for administrator) (not start)
   TODO:
 
-# mongodb (not done)
-TODO:use mongoose or keep mongodb connect open
+# mongodb (done)
+use generic-pool to keep mongodb connect open
   
 # response layout (not start)
 TODO:
