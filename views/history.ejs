@@ -11,8 +11,8 @@
     <div class="history">
         <div class="history_name"><%= record.menu.name %></div>
         <div class="history_num">¥ <%= record.menu.price %></div>
-        <div class="history_status"><%= record.payStatus %></div>
-        <div class="history_payWay"><%= record.payWay %></div>
+        <div class="history_status"><%= record.payStatusEntity.name %></div>
+        <div class="history_payWay"><%= record.payWayEntity.name %></div>
         <div><%= record.num %>份</div>
     </div>
     <% }) %>

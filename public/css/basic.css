@@ -66,6 +66,11 @@ img {
     text-decoration: none;
 }
 
+.logout{
+    font-size: 12px;
+    text-decoration: underline !important;
+}
+
 .user_operation {
     width: 100px;
     height: 40px;

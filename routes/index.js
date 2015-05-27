@@ -1,5 +1,7 @@
 var User = require('../models/User');
 var Menus = require('../models/Menus');
+var PayStatus = require('../models/PayStatus');
+var PayWay = require('../models/PayWay');
 //var MenusComment = require('../models/MenusComment');
 var ModelBasicClass = require('../models/ModelBasicClass');
 
@@ -129,7 +131,6 @@ module.exports = function (app) {
      */
     app.post('/login', function (req, res) {
         var rememberMe = req.body.rememberMe;
-        console.log(rememberMe);
         var password = req.body.password;
         var filter = {userName: req.body.userName.trim()};
         ModelBasicClass.getItemsByFilter(filter, 'User_Admin', function (err, users) {
@@ -168,8 +169,8 @@ module.exports = function (app) {
             userId: req.session.user._id,
             userName: req.session.user.userName,
             dateOrder: getDateStr(),
-            payStatus: 0,
-            payWay: '',
+            payStatus: 1,
+            payWay: 0,
             num: 1
         };
 
@@ -192,7 +193,6 @@ module.exports = function (app) {
                         console.error('update order record error');
                         res.send({data: 'fail'});
                     }
-                    console.log(result);
                     if (result === 1) {
                         res.send({data: 'success'});
                     }
@@ -220,7 +220,6 @@ module.exports = function (app) {
      */
     app.post('/deleteOrder', function (req, res) {
         var orderId = req.body.orderId;
-        console.log(orderId);
         ModelBasicClass.DeleteItemById(orderId, 'Order_Record', function (err, result) {
 
             if (err) {
@@ -231,7 +230,7 @@ module.exports = function (app) {
                     }
                 );
             }
-            console.log(result);
+
             res.send(
                 {
                     data: 'success',
@@ -263,13 +262,17 @@ module.exports = function (app) {
                 var result = [];
                 for (var i = 0; i < records.length; i++) {
                     var record = records[i];
+                    //payStatus
+                    record.payStatusEntity = PayStatus[record.payStatus];
+                    //payway
+                    record.payWayEntity = PayWay[record.payWay];
+
                     var menuId = record.menuId;
                     var menu = menus.filter(function (item) {
                         return item.id === menuId;
                     });
                     record.menu = menu[0];
 
-                    console.log(record);
                     var index = -1;
                     for (var j = 0; j < result.length; j++) {
                         var dateOrder = result[j].date;
@@ -297,7 +300,7 @@ module.exports = function (app) {
                     var date2 = item2.date.replace('-', '');
                     return date1 < date2;
                 });
-                //console.log(result);
+
                 res.render('history',
                     {
                         title: 'ITWOCloud Lunch Order System',
@@ -308,6 +311,19 @@ module.exports = function (app) {
             });
         });
 
+    });
+
+    /**
+     * log out
+     * remove seesion and cookies
+     */
+    app.get('/logout',function(req,res){
+        req.session.destroy();
+        res.clearCookie('_id');
+        res.clearCookie('userName');
+        res.clearCookie('password');
+        res.clearCookie('role');
+        res.redirect('/login');
     });
 
     /**
