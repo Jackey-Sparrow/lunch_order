@@ -2,30 +2,7 @@
  * Created by Jackey Li on 2015/5/19.
  */
 var mongodb = require('./db'),
-    mongodbNew = require('mongodb'),
-    BSON = require('mongodb').BSONPure,
-    http = require('http'),
-    poolModule = require('generic-pool');
-
-var pool = poolModule.Pool({
-    name: 'mongodb',
-    create: function (callback) {
-        var server_options = {'auto_reconnect': false, poolSize: 1};
-        var db_options = {w: -1};
-        var mongoserver = new mongodbNew.Server('localhost', 27017, server_options);
-        var db = new mongodbNew.Db('lunchOrder', mongoserver, db_options);
-        db.open(function (err, db) {
-            if (err)return callback(err);
-            callback(null, db);
-        });
-    },
-    destroy: function (db) {
-        db.close();
-    },
-    max: 10,//max Concurrent quantity
-    idleTimeoutMillis: 30000,
-    log: false
-});
+    BSON = require('mongodb').BSONPure;
 
 /**
  * basic class for find / add / update / delete item
@@ -43,25 +20,26 @@ var ModelBasicClass = function () {
  * @param callback
  */
 ModelBasicClass.addItem = function (item, dataTableName, callback) {
-
-    pool.acquire(function (err, db) {
+    mongodb.open(function (err, db) {
         if (err) {
             return callback(err);
-        } else {
-
-            db.collection(dataTableName).insert(
+        }
+        db.collection(dataTableName, function (err, collection) {
+            if (err) {
+                return callback(err);
+            }
+            collection.insert(
                 item,
                 {safe: true},
                 function (err, newItems) {
+                    mongodb.close();
                     if (err) {
                         return callback(err);
                     }
                     callback(null, newItems[0]);
-                    pool.release(db);
                 }
-            );
-
-        }
+            )
+        });
     });
 };
 
@@ -73,18 +51,26 @@ ModelBasicClass.addItem = function (item, dataTableName, callback) {
  * @param callback
  */
 ModelBasicClass.getItemByFilter = function (filter, dataTableName, callback) {
-
-    pool.acquire(function (err, db) {
+    mongodb.open(function (err, db) {
         if (err) {
-            return callback(err);
-        } else {
-            db.collection(dataTableName).findOne(filter, function (err, menu) {
-                callback(null, menu);
-                pool.release(db);
-            });
+            return callback(err);//错误，返回 err 信息
         }
-    });
 
+        db.collection(dataTableName, function (err, collection) {
+            if (err) {
+                mongodb.close();
+                return callback(err);//错误，返回 err 信息
+            }
+
+            collection.findOne(filter, function (err, menu) {
+                mongodb.close();
+                if (err) {
+                    return callback(err);//失败！返回 err 信息
+                }
+                callback(null, menu);//成功！返回查询的用户信息
+            });
+        });
+    });
 };
 
 /**
@@ -95,17 +81,23 @@ ModelBasicClass.getItemByFilter = function (filter, dataTableName, callback) {
  * @param callback
  */
 ModelBasicClass.getItemsByFilter = function (filter, dataTableName, callback) {
-    pool.acquire(function (err, db) {
+    mongodb.open(function (err, db) {
         if (err) {
             return callback(err);
-        } else {
-
-            db.collection(dataTableName).find(filter).toArray(function (err, docs) {
-                //callback(null, JSON.stringify(docs, null, 2));
-                callback(null, docs);
-                pool.release(db);
-            });
         }
+        db.collection(dataTableName, function (err, collection) {
+            if (err) {
+                mongodb.close();
+                return callback(err);
+            }
+            collection.find(filter).toArray(function (err, docs) {
+                mongodb.close();
+                if (err) {
+                    return callback(err);
+                }
+                callback(null, docs);
+            });
+        });
     });
 };
 
@@ -116,16 +108,23 @@ ModelBasicClass.getItemsByFilter = function (filter, dataTableName, callback) {
  * @param callback
  */
 ModelBasicClass.getAll = function (dataTableName, callback) {
-    pool.acquire(function (err, db) {
+    mongodb.open(function (err, db) {
         if (err) {
             return callback(err);
-        } else {
-
-            db.collection(dataTableName).find().toArray(function (err, docs) {
-                callback(null, docs);
-                pool.release(db);
-            });
         }
+        db.collection(dataTableName, function (err, collection) {
+            if (err) {
+                mongodb.close();
+                return callback(err);
+            }
+            collection.find().toArray(function (err, docs) {
+                mongodb.close();
+                if (err) {
+                    return callback(err);
+                }
+                callback(null, docs);
+            });
+        });
     });
 };
 

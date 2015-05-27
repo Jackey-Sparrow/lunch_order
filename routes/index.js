@@ -134,13 +134,15 @@ module.exports = function (app) {
         var password = req.body.password;
         var filter = {userName: req.body.userName.trim()};
         ModelBasicClass.getItemsByFilter(filter, 'User_Admin', function (err, users) {
+
             if (!users.length) {
                 req.flash('error', '用户不存在!');
                 return res.redirect('/login');
             }
 
             var user = users[0];
-            if (user.password != password.toString()) {
+
+            if (user.password.toString().trim() != password.toString().trim()) {
                 req.flash('error', '密码错误!');
                 return res.redirect('/login');
             }
