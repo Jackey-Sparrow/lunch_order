@@ -67,7 +67,6 @@ var addOrder = function (e) {
         },
         error: function (error) {
             console.log('add order fail:' + error);
-            //$('.error_message_content').html('add order fail,Please try again');
             showError('添加购物车失败.', '抱歉');
         }
     });
@@ -104,7 +103,7 @@ $('.menu_message_delete').click(function () {
         },
         error: function (error) {
             console.log('delete order fail' + error);
-            //todo: show error dialog
+            showError('删除订单失败.', '抱歉');
         }
     });
 });
