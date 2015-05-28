@@ -166,6 +166,7 @@ module.exports = function (app) {
      */
     app.post('/addOrder', function (req, res) {
         var menuId = parseInt(req.body.menuId);
+        console.log(req.session.user);
         var record = {
             menuId: menuId,
             userId: req.session.user._id,
@@ -190,7 +191,7 @@ module.exports = function (app) {
                 //update
                 var oldRecord = records[0];
                 oldRecord.num = oldRecord.num + 1;
-                OrderRecord.updateOrder(oldRecord, function (err, result) {
+                ModelBasicClass.UpdateItem(oldRecord, 'Order_Record', function (err, result) {
                     if (err) {
                         console.error('update order record error');
                         res.send({data: 'fail'});
@@ -319,7 +320,7 @@ module.exports = function (app) {
      * log out
      * remove seesion and cookies
      */
-    app.get('/logout',function(req,res){
+    app.get('/logout', function (req, res) {
         req.session.destroy();
         res.clearCookie('_id');
         res.clearCookie('userName');
@@ -337,11 +338,14 @@ module.exports = function (app) {
      */
     function checkLogin(req, res, next) {
         var cookies = getCookies(req.headers.cookie);
-        if ((!req.session.user)  && (!cookies._id)) {
+        if (cookies._id) {
+            req.session.user = cookies;
+        }
+        if (!req.session.user) {
             req.flash('error', '请先登录');
             return res.redirect('/login');
         }
-        req.session.user = cookies;
+
         next();
     }
 

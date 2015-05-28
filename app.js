@@ -17,12 +17,12 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     secret: settings.cookieSecret,
-    cookie: {maxAge: 1000 * 60 * 60 * 24 * 30},
-    stroe: new MongoStroe({
-        db: settings.db,
-        host: settings.host,
-        port: settings.port
-    })
+    cookie: {maxAge: 1000 * 60 * 60 * 24 * 30}
+    //stroe: new MongoStroe({
+    //    db: settings.db,
+    //    host: settings.host,
+    //    port: settings.port
+    //})
 }));
 
 // view engine setup

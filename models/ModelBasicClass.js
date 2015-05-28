@@ -54,6 +54,7 @@ ModelBasicClass.addItem = function (item, dataTableName, callback) {
                 {safe: true},
                 function (err, newItems) {
                     if (err) {
+                        pool.release(db);
                         return callback(err);
                     }
                     callback(null, newItems[0]);
@@ -142,25 +143,46 @@ ModelBasicClass.DeleteItemById = function (Id, dataTableName, callback) {
         return;
     }
     Id = BSON.ObjectID.createFromHexString(Id);
-    mongodb.open(function (err, db) {
+
+    pool.acquire(function (err, db) {
         if (err) {
             return callback(err);
-        }
-        db.collection(dataTableName, function (err, collection) {
-            if (err) {
-                mongodb.close();
-                return callback(err);
-            }
-            collection.remove({_id: Id}, function (err, result) {
-                mongodb.close();
+        } else {
+
+            db.collection(dataTableName).remove({_id: Id}, function (err, result) {
                 if (err) {
                     return callback(err);
                 }
-                return callback(null, result);
+                callback(null, result);
+                pool.release(db);
             });
-        });
+        }
     });
 };
 
+
+ModelBasicClass.UpdateItem = function (record, dataTableName, callback) {
+
+    pool.acquire(function (err, db) {
+        if (err) {
+            return callback(err);
+        } else {
+
+            db.collection(dataTableName).update(
+                {_id: record._id},
+                record,
+                {upsert: true, multi: false},
+                function (err, result) {
+
+                    if (err) {
+                        return callback(err);
+                    }
+                    callback(null, result);
+                    pool.release(db);
+                }
+            );
+        }
+    });
+};
 
 module.exports = ModelBasicClass;

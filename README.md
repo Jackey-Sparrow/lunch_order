@@ -12,7 +12,8 @@
 # comment (not done)
  add comment and show comment.
  TODO: manager comment / pageination 
- 
+
+# error dialog (done)
  
 # order record (not done)
  add order. 

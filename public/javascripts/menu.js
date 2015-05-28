@@ -22,11 +22,7 @@ var menuAttach = function (e, action) {
     }
 };
 
-var testA = function (arg) {
-    console.log(arg);
-};
 
-//TODO: use proxy will be better
 /**
  * menu mouseenter mouseover mouseleave
  * show / hide dom
@@ -71,8 +67,8 @@ var addOrder = function (e) {
         },
         error: function (error) {
             console.log('add order fail:' + error);
-            $('.error_message_content').html('add order fail,Please try again');
-            $('.error').show();
+            //$('.error_message_content').html('add order fail,Please try again');
+            showError('添加购物车失败.', '抱歉');
         }
     });
 };
@@ -91,6 +87,9 @@ $('.cart').dblclick(function () {
     addOrder(this);
 });
 
+/**
+ * delete order
+ */
 $('.menu_message_delete').click(function () {
     var orderId = $(this).attr('orderId');
     var that = this;
