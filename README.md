@@ -15,14 +15,14 @@
 
 # error dialog (done)
  
-# order record (not done)
+# order record (done)
  add order. 
  order history
  show message of orders todaysmenus
  delete order
- TODO:order status 0 取消 1 已提交 2 系统已确认 3已发货 4 已签收
+ order status 0 取消 1 已提交 2 系统已确认 3已发货 4 已签收
                     ````admin modify status
-                    TODO: PAY WAY 0 未付款 1 现金支付 2 微信支付 3 支付宝支付 4 其它
+                    PAY WAY 0 未付款 1 现金支付 2 微信支付 3 支付宝支付 4 其它
                     ~~~~admin modify payway
 
 # guess you what you like (not start)

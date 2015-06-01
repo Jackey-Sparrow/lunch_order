@@ -1,14 +1,6 @@
-var User = require('../models/User');
-var Menus = require('../models/Menus');
 var PayStatus = require('../models/PayStatus');
 var PayWay = require('../models/PayWay');
-//var MenusComment = require('../models/MenusComment');
 var ModelBasicClass = require('../models/ModelBasicClass');
-
-var OrderRecord = require('../models/OrderRecord');
-//todo: use promise
-//var allPromise = Q.all([ fs_readFile('file1.txt'), fs_readFile('file2.txt') ])
-//allPromise.then(console.log, console.error)
 
 module.exports = function (app) {
     /**
@@ -314,6 +306,89 @@ module.exports = function (app) {
             });
         });
 
+    });
+
+    /**
+     * manager order
+     */
+    app.get('/managerOrder', checkLogin);
+    app.get('/managerOrder', function (req, res) {
+        if (req.session.user.role !== 1) {
+            return res.redirect('/');
+        }
+        var filter = {
+            dateOrder: getDateStr()
+        };
+
+        ModelBasicClass.getAll('Menus', function (err, menus) {
+            if (err) {
+                console.error('get menus error');
+            }
+            ModelBasicClass.getItemsByFilter(filter, 'Order_Record', function (err, records) {
+                if (err) {
+                    console.error('get all history record error');
+                }
+
+                var result = [];
+                for (var i = 0; i < records.length; i++) {
+                    var record = records[i];
+                    //payStatus
+                    //record.payStatusEntity = PayStatus[record.payStatus];
+                    //payway
+                    record.payWayEntity = PayWay[record.payWay];
+
+                    var menuId = record.menuId;
+                    var menu = menus.filter(function (item) {
+                        return item.id === menuId;
+                    });
+                    record.menu = menu[0];
+
+                    var index = -1;
+                    for (var j = 0; j < result.length; j++) {
+                        var dateOrder = result[j].date;
+                        if (dateOrder === records[i].dateOrder) {
+                            index = j;
+                            break;
+                        }
+                    }
+
+                    if (index === -1) {
+                        result.push(
+                            {
+                                date: record.dateOrder,
+                                data: [record]
+                            }
+                        );
+                    } else {
+                        result[index].data.push(record);
+                    }
+
+                }
+
+                result.sort(function (item1, item2) {
+                    var date1 = item1.date.replace('-', '');
+                    var date2 = item2.date.replace('-', '');
+                    return date1 < date2;
+                });
+
+                res.render('managerOrder',
+                    {
+                        title: 'ITWOCloud Lunch Order System',
+                        user: req.session.user,
+                        historys: result,
+                        payStatus: PayStatus,
+                        payWays: PayWay
+                    }
+                );
+            });
+        });
+
+    });
+    app.post('/managerOrder', function (req, res) {
+        var orderId = req.body.orderId;
+        var name = req.body.name;
+        var selectValue = req.body.selectValue;
+        console.log(req.body);
     });
 
     /**
