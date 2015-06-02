@@ -42,7 +42,10 @@
     <% }) %>
     <% }) %>
 
+    <div style="text-align: right; margin-right: 40px; font-size: 15px;">总份：<%=totalNum%>  总价： <%=totalPrice%> 元</div>
 </div>
+<link rel='stylesheet' href='/css/message.css'/>
+<script src="/javascripts/error.js"></script>
 <%- include footer %>
 <script>
     $(function () {
@@ -61,10 +64,10 @@
                 method: 'POST',
                 data: param,
                 success: function (response) {
-
+                        console.log(response);
                 },
                 error: function (error) {
-                    console.log(error);
+                    showError('修改状态失败！请重试。');
                 }
             });
         });

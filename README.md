@@ -11,7 +11,7 @@
 
 # comment (not done)
  add comment and show comment.
- TODO: manager comment / pageination 
+ TODO: manager comment / pagination
 
 # error dialog (done)
  
@@ -28,8 +28,8 @@
 # guess you what you like (not start)
  TODO: 
  
-# today's order manager (just for administrator) (not start)
-  TODO:
+# today's order manager (just for administrator) ()
+  TODO:pagination
 
 # mongodb (done)
 use generic-pool to keep mongodb connect open

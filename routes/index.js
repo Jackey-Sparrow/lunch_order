@@ -1,6 +1,7 @@
 var PayStatus = require('../models/PayStatus');
 var PayWay = require('../models/PayWay');
 var ModelBasicClass = require('../models/ModelBasicClass');
+var BSON = require('mongodb').BSONPure;
 
 module.exports = function (app) {
     /**
@@ -319,6 +320,7 @@ module.exports = function (app) {
         var filter = {
             dateOrder: getDateStr()
         };
+        var totalPrice = 0, totalNum = 0;
 
         ModelBasicClass.getAll('Menus', function (err, menus) {
             if (err) {
@@ -330,18 +332,23 @@ module.exports = function (app) {
                 }
 
                 var result = [];
+
                 for (var i = 0; i < records.length; i++) {
                     var record = records[i];
                     //payStatus
                     //record.payStatusEntity = PayStatus[record.payStatus];
                     //payway
-                    record.payWayEntity = PayWay[record.payWay];
+                    //record.payWayEntity = PayWay[record.payWay];
+
 
                     var menuId = record.menuId;
                     var menu = menus.filter(function (item) {
                         return item.id === menuId;
                     });
                     record.menu = menu[0];
+
+                    totalPrice += record.num * record.menu.price;
+                    totalNum += record.num;
 
                     var index = -1;
                     for (var j = 0; j < result.length; j++) {
@@ -377,7 +384,9 @@ module.exports = function (app) {
                         user: req.session.user,
                         historys: result,
                         payStatus: PayStatus,
-                        payWays: PayWay
+                        payWays: PayWay,
+                        totalPrice: totalPrice,
+                        totalNum: totalNum
                     }
                 );
             });
@@ -387,8 +396,32 @@ module.exports = function (app) {
     app.post('/managerOrder', function (req, res) {
         var orderId = req.body.orderId;
         var name = req.body.name;
-        var selectValue = req.body.selectValue;
+        var selectValue = parseInt(req.body.selectValue);
         console.log(req.body);
+        var filter = {
+            _id: BSON.ObjectID.createFromHexString(orderId)
+        };
+        ModelBasicClass.getItemByFilter(filter, 'Order_Record', function (err, order) {
+            if (err) {
+                console.error('manager order get order error');
+                res.send(
+                    {
+                        data: 'fail'
+                    }
+                );
+            }
+            console.log(order);
+            order[name] = selectValue;
+            ModelBasicClass.UpdateItem(order, 'Order_Record', function (err, result) {
+                if (err) {
+                    console.error('update order record error');
+                    res.send({data: 'fail'});
+                }
+                if (result === 1) {
+                    res.send({data: 'success'});
+                }
+            });
+        })
     });
 
     /**
