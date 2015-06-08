@@ -1,10 +1,14 @@
 <%- include header %>
 <link rel='stylesheet' href='/css/history.css'/>
 <div class="content">
+    <div class="choose_Date">
+        <div class="choose_Date_preview"><a>前一天</a></div>
+        <div class="choose_Date_next"><a>后一天</a></div>
+    </div>
     <% historys.forEach(function(history){ %>
     <div class="history_date">
         <span>- - - - - - - - - - - </span>
-        <span><%= history.date %></span>
+        <span id="historyDate"><%= history.date %></span>
         <span>- - - - - - - - - - - </span>
     </div>
     <% history.data.forEach(function(record){ %>
@@ -42,7 +46,8 @@
     <% }) %>
     <% }) %>
 
-    <div style="text-align: right; margin-right: 40px; font-size: 15px;">总份：<%=totalNum%>  总价： <%=totalPrice%> 元</div>
+    <div style="text-align: right; margin-right: 40px; font-size: 15px;">总份：<%= totalNum %>  总价： <%= totalPrice %>元
+    </div>
 </div>
 <link rel='stylesheet' href='/css/message.css'/>
 <script src="/javascripts/error.js"></script>
@@ -64,13 +69,13 @@
                 method: 'POST',
                 data: param,
                 success: function (response) {
-                        console.log(response);
+                    console.log(response);
                 },
                 error: function (error) {
                     showError('修改状态失败！请重试。');
                 }
             });
         });
-    })
-    ;
+        $('')
+    });
 </script>

@@ -167,7 +167,8 @@ module.exports = function (app) {
             dateOrder: getDateStr(),
             payStatus: 1,
             payWay: 0,
-            num: 1
+            num: 1,
+            insertDate:new Date()
         };
 
         var filter = {
@@ -326,7 +327,8 @@ module.exports = function (app) {
             if (err) {
                 console.error('get menus error');
             }
-            ModelBasicClass.getItemsByFilter(filter, 'Order_Record', function (err, records) {
+            // ModelBasicClass.getItemsByFilter(filter, 'Order_Record', function (err, records) {
+            ModelBasicClass.getAllByPage('Order_Record', function (err, records) {
                 if (err) {
                     console.error('get all history record error');
                 }
@@ -335,11 +337,6 @@ module.exports = function (app) {
 
                 for (var i = 0; i < records.length; i++) {
                     var record = records[i];
-                    //payStatus
-                    //record.payStatusEntity = PayStatus[record.payStatus];
-                    //payway
-                    //record.payWayEntity = PayWay[record.payWay];
-
 
                     var menuId = record.menuId;
                     var menu = menus.filter(function (item) {
@@ -474,9 +471,11 @@ module.exports = function (app) {
 
     function getDateStr() {
         var nowDate = new Date();
+        var day = nowDate.getDate();
+        day = day < 10 ? ('0' + day.toString()) : day.toString();
         var month = nowDate.getMonth() + 1;
         month = month < 10 ? ('0' + month.toString()) : month.toString();
-        return nowDate.getFullYear().toString() + '-' + month + '-' + nowDate.getDate().toString();
+        return nowDate.getFullYear().toString() + '-' + month + '-' + day;
     }
 
     function getCookies(cookie) {

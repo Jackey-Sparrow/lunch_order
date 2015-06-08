@@ -102,7 +102,6 @@ ModelBasicClass.getItemsByFilter = function (filter, dataTableName, callback) {
         } else {
 
             db.collection(dataTableName).find(filter).toArray(function (err, docs) {
-                //callback(null, JSON.stringify(docs, null, 2));
                 callback(null, docs);
                 pool.release(db);
             });
@@ -129,6 +128,21 @@ ModelBasicClass.getAll = function (dataTableName, callback) {
         }
     });
 };
+
+ModelBasicClass.getAllByPage = function (dataTableName, callback) {
+    pool.acquire(function (err, db) {
+        if (err) {
+            return callback(err);
+        } else {
+
+            db.collection(dataTableName).find().sort({"insertDate":1}).skip(10).limit(10).toArray(function (err, docs) {
+                callback(null, docs);
+                pool.release(db);
+            });
+        }
+    });
+};
+
 
 /**
  * delete item by id
